@@ -1,152 +1,189 @@
 # GoodCabs – Transportation Data Processing & Analytics System
 
+An end-to-end data engineering project built using Databricks and PySpark to process transportation data and generate useful business insights.
+
+---
+
 ## Project Overview
 
-GoodCabs is an end-to-end data engineering project built to process transportation data and generate business insights.
+GoodCabs is a transportation data engineering project that processes city and trip data through a complete ETL pipeline.
 
-The project uses Databricks and PySpark to ingest, clean, transform and analyze transportation trip data.
+The project uses Databricks, PySpark, SQL and Delta Lake to ingest, clean, transform and analyze transportation data.
 
 The project follows the Medallion Architecture:
 
 **Bronze → Silver → Gold**
 
-The processed data is used for SQL analysis, interactive dashboards and natural-language analytics using Databricks Genie.
+The final Gold datasets are used for SQL analysis, interactive dashboards and natural-language analytics using Databricks Genie.
 
 ---
 
 ## Business Objectives
 
-The project analyzes transportation performance across different cities and helps answer questions such as:
+The project focuses on analyzing transportation performance across different cities.
 
-- Which city generates the highest revenue?
-- Which city has the highest number of rides?
-- What are the average passenger and driver ratings?
-- How does revenue change over time?
-- How does the number of rides change over time?
+- Identify the city with the highest revenue
+- Identify the city with the highest number of rides
+- Analyze average passenger ratings
+- Analyze average driver ratings
+- Analyze revenue trends over time
+- Analyze ride trends over time
+- Compare transportation performance across cities
 
 ---
 
 ## Architecture
 
-```text
-Raw Transportation Data
-          |
-          v
-      Bronze Layer
-          |
-          v
-   Cleaning & Quality Checks
-          |
-          v
-      Silver Layer
-          |
-          v
-   Business Transformations
-          |
-          v
-       Gold Layer
-          |
-     +----+----+
-     |         |
-     v         v
- Dashboard   Genie
-     |
-     v
-Business Analytics
+The project follows a Medallion Architecture for structured and reliable data processing.
+
+<p align="center">
+  <img src="screenshots/architecture.png" width="850">
+</p>
+
+<p align="center">
+  <i>GoodCabs Data Engineering Architecture</i>
+</p>
+
+---
 
 ## Technologies Used
 
-- Databricks
-- PySpark
-- SQL
-- Delta Lake
-- Lakeflow Pipelines
-- Unity Catalog
-- Databricks AI/BI Dashboards
-- Databricks Genie
-- GitHub
+| Technology | Purpose |
+|---|---|
+| Databricks | Data engineering and pipeline development |
+| PySpark | Data processing and transformation |
+| SQL | Business analysis |
+| Delta Lake | Reliable data storage |
+| Lakeflow Pipelines | Pipeline processing |
+| Unity Catalog | Data organization and access control |
+| AI/BI Dashboards | Data visualization |
+| Databricks Genie | Natural-language analytics |
+| GitHub | Version control and project documentation |
+
+---
 
 ## Data Processing
 
 ### Bronze Layer
-Stores raw city and trip data.
+
+The Bronze layer stores raw transportation data after ingestion.
+
+**Tables:**
 
 - `goodcabs.bronze.city`
 - `goodcabs.bronze.trips`
 
+The trips data is ingested using a streaming-based approach and metadata such as source file information and ingestion timestamp is captured.
+
+---
+
 ### Silver Layer
-Cleans and validates the data.
+
+The Silver layer contains cleaned and transformed data with data quality validation.
+
+**Tables:**
 
 - `goodcabs.silver.city`
 - `goodcabs.silver.trips`
 - `goodcabs.silver.calendar`
 
+**Main transformations:**
+
+- Column renaming
+- Data validation
+- Processing timestamps
+- Calendar transformation
+- Data preparation for analytics
+
+---
+
 ### Gold Layer
-Contains business-ready data for analytics.
+
+The Gold layer contains business-ready datasets for analytics and reporting.
+
+**Tables:**
 
 - `goodcabs.gold.gold_fact_trips`
 - `goodcabs.gold.city_metrics`
 
-Key metrics include total rides, total revenue, average passenger rating and average driver rating.
+The `gold_fact_trips` table combines trip, city and calendar information.
+
+The `city_metrics` table provides important city-level KPIs:
+
+- Total rides
+- Total revenue
+- Average passenger rating
+- Average driver rating
+
+---
 
 ## Data Quality
 
-The Silver layer includes checks for:
+Data quality checks are applied in the Silver layer to improve data reliability.
 
-- Valid dates
-- Driver ratings
-- Passenger ratings
+The project validates:
+
+- Business date
+- Driver rating
+- Passenger rating
+- Data consistency
+
+Example validation rules include:
+
+- Driver rating should be between 1 and 10
+- Passenger rating should be between 1 and 10
+- Business date should be valid
+
+---
+
+## Calendar Dimension
+
+A calendar dimension is created to support date-based analysis and transportation trend reporting.
+
+**Table:**
+
+`goodcabs.silver.calendar`
+
+The calendar dimension contains:
+
+- Date
+- Date Key
+- Year
+- Month
+- Week
+- Weekday
+- Quarter
+- Weekend indicator
+
+This helps in performing time-based analysis such as revenue trends and ride trends.
+
+---
+
+## Gold Analytics
+
+The Gold layer is used to generate business-level insights from transportation data.
+
+Some important metrics include:
+
+| Metric | Description |
+|---|---|
+| Total Rides | Total number of completed trips |
+| Total Revenue | Total revenue generated from trips |
+| Average Passenger Rating | Average rating given by passengers |
+| Average Driver Rating | Average rating received by drivers |
+
+City-level analysis helps identify the performance of different cities.
+
+---
 
 ## SQL Analysis
 
-SQL is used for city-wise revenue, rides, ratings and trend analysis.
+SQL is used to analyze the Gold layer and answer important business questions.
 
-## Dashboard
+### City-wise Transportation Performance
 
-The Databricks AI/BI Dashboard includes:
-
-- Total Revenue
-- Total Rides
-- Average Ratings
-- Revenue by City
-- Rides by City
-- Revenue Trend
-- Rides Trend
-- City Filter
-
-## Databricks Genie
-
-Genie enables natural-language analysis of the Gold data.
-
-Example:
-
-- Which city has the highest revenue?
-- Which city has the highest number of rides?
-
-## Unity Catalog
-
-Data is organized using:
-
-- `goodcabs.bronze`
-- `goodcabs.silver`
-- `goodcabs.gold`
-
-Basic access permissions are configured for the Gold layer.
-
-## Project Structure
-
-```text
-GoodCabs-Data-Engineering/
-│
-├── README.md
-└── transformations/
-    ├── city_silver.py
-    ├── calendar.py
-    ├── trips_bronze.py
-    ├── trips_silver.py
-    ├── gold_fact_trips.py
-    ├── gold_city_metrics.py
-    ├── fact_trips_vadodara.py
-    └── city_access.py
-
+```sql
+SELECT *
+FROM goodcabs.gold.city_metrics
+ORDER BY total_revenue DESC;
           
