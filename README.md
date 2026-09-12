@@ -188,3 +188,51 @@ SQL is used to analyze the Gold layer and answer important business questions.
 SELECT *
 FROM goodcabs.gold.city_metrics
 ORDER BY total_revenue DESC;
+
+---
+
+## Dashboard
+
+An interactive Databricks AI/BI Dashboard was created to visualize transportation performance across different cities.
+
+The dashboard provides a clear view of important business KPIs and helps compare city-level transportation performance.
+
+### Key Metrics
+
+- Total Revenue
+- Total Rides
+- Average Passenger Rating
+- Average Driver Rating
+
+### Dashboard Analysis
+
+The dashboard includes visualizations for:
+
+- Revenue by City
+- Rides by City
+- Revenue Trend
+- Rides Trend
+- City-wise performance
+- City Filter
+
+### Dashboard View 1
+
+<p align="center">
+  <img src="screenshots/dashborad1.png" width="850">
+</p>
+
+<p align="center">
+  <i>GoodCabs AI/BI Dashboard</i>
+</p>
+
+### Dashboard View 2
+
+<p align="center">
+  <img src="screenshots/dashboard3.png" width="850">
+</p>
+
+<p align="center">
+  <i>GoodCabs City-wise Dashboard Analysis</i>
+</p>
+
+---
