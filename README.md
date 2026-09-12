@@ -206,6 +206,32 @@ The dashboard includes visualizations for:
 - City-wise performance
 - City Filter
 
+---
+
+## Dashboard
+
+An interactive Databricks AI/BI Dashboard was created to visualize transportation performance across different cities.
+
+The dashboard provides a clear view of important business KPIs and helps compare city-level transportation performance.
+
+### Key Metrics
+
+- Total Revenue
+- Total Rides
+- Average Passenger Rating
+- Average Driver Rating
+
+### Dashboard Analysis
+
+The dashboard includes visualizations for:
+
+- Revenue by City
+- Rides by City
+- Revenue Trend
+- Rides Trend
+- City-wise performance
+- City Filter
+
 ### Dashboard View 1
 
 <p align="center">
@@ -216,7 +242,7 @@ The dashboard includes visualizations for:
   <i>GoodCabs AI/BI Dashboard</i>
 </p>
 
-### Dashboard View 2
+### Dashboard View 3
 
 <p align="center">
   <img src="screenshots/dashboard3.png" width="850">
