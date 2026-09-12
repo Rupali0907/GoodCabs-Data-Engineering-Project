@@ -182,15 +182,6 @@ City-level analysis helps identify the performance of different cities.
 
 SQL is used to analyze the Gold layer and answer important business questions.
 
-### City-wise Transportation Performance
-
-```sql
-SELECT *
-FROM goodcabs.gold.city_metrics
-ORDER BY total_revenue DESC;
-
----
-
 ## Dashboard
 
 An interactive Databricks AI/BI Dashboard was created to visualize transportation performance across different cities.
