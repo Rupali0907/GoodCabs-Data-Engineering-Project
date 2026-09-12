@@ -37,11 +37,11 @@ The project focuses on analyzing transportation performance across different cit
 The project follows a Medallion Architecture for structured and reliable data processing.
 
 <p align="center">
-  <img src="screenshots/architecture.png" width="850">
+  <img src="screenshots/medallian%20architecture.png" width="850">
 </p>
 
 <p align="center">
-  <i>GoodCabs Data Engineering Architecture</i>
+  <i>GoodCabs Medallion Architecture</i>
 </p>
 
 ---
@@ -56,9 +56,9 @@ The project follows a Medallion Architecture for structured and reliable data pr
 | Delta Lake | Reliable data storage |
 | Lakeflow Pipelines | Pipeline processing |
 | Unity Catalog | Data organization and access control |
-| AI/BI Dashboards | Data visualization |
+| AI/BI Dashboard | Data visualization |
 | Databricks Genie | Natural-language analytics |
-| GitHub | Version control and project documentation |
+| GitHub | Version control and documentation |
 
 ---
 
@@ -73,7 +73,9 @@ The Bronze layer stores raw transportation data after ingestion.
 - `goodcabs.bronze.city`
 - `goodcabs.bronze.trips`
 
-The trips data is ingested using a streaming-based approach and metadata such as source file information and ingestion timestamp is captured.
+The trips data is ingested using a streaming-based approach.
+
+Metadata such as source file information and ingestion timestamp is also captured.
 
 ---
 
@@ -163,7 +165,7 @@ This helps in performing time-based analysis such as revenue trends and ride tre
 
 The Gold layer is used to generate business-level insights from transportation data.
 
-Some important metrics include:
+Important metrics include:
 
 | Metric | Description |
 |---|---|
@@ -186,4 +188,3 @@ SQL is used to analyze the Gold layer and answer important business questions.
 SELECT *
 FROM goodcabs.gold.city_metrics
 ORDER BY total_revenue DESC;
-          
